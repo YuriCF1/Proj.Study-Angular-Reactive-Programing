@@ -13,8 +13,10 @@ export class ListaLivrosComponent {
 
   constructor(private service: BookService) { }
 
-  getTheBooks(){
-    this.service.getBooks(this.searchField)
+  getTheBooks() {
+    this.service.getBooks(this.searchField).subscribe((returnFromAPI) => {
+      console.log(returnFromAPI);
+    })
   }
 }
 
