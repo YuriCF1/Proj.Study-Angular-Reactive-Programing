@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { BookService } from 'src/app/service/book.service';
 
 @Component({
@@ -6,15 +7,17 @@ import { BookService } from 'src/app/service/book.service';
   templateUrl: './lista-livros.component.html',
   styleUrls: ['./lista-livros.component.css']
 })
-export class ListaLivrosComponent {
+export class ListaLivrosComponent implements OnDestroy {
 
   listaLivros: [];
   searchField: string = '';
 
+  subscription: Subscription
+
   constructor(private service: BookService) { }
 
   getTheBooks() {
-    this.service.getBooks(this.searchField).subscribe(
+    this.subscription = this.service.getBooks(this.searchField).subscribe(
       // (returnFromAPI) => console.log(returnFromAPI), (error) => { console.log(error); } //DESATUALIZADA
       //Novo método para passar parâmetros para o subscribe
       {
@@ -24,6 +27,11 @@ export class ListaLivrosComponent {
       }
     )
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+  }
+
 }
 
 
