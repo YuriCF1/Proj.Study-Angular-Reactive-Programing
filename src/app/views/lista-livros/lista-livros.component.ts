@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Livro } from 'src/app/models/interfaces';
+import { Item, Livro } from 'src/app/models/interfaces';
+import { classLivroVolumeInfo } from 'src/app/models/livrosVolumeInfo';
 import { BookService } from 'src/app/service/book.service';
 
 @Component({
@@ -32,20 +33,25 @@ export class ListaLivrosComponent implements OnDestroy {
     )
   }
 
-  livrosResultadoParaLivros(items): Livro[] {
-    const livros: Livro[] = []
-    items.forEach(item => {
-      livros.push(this.livro = {
-        title: item.volumeInfo?.title,
-        authors: item.volumeInfo?.authors,
-        publisher: item.volumeInfo?.publisher,
-        publishedDate: item.volumeInfo?.publishedDate,
-        description: item.volumeInfo?.description,
-        previewLink: item.volumeInfo?.previewLink,
-        thumbnail: item.volumeInfo?.imageLinks?.thumbnail
-      })
-    });
-    return livros
+  livrosResultadoParaLivros(items: Item[]): classLivroVolumeInfo[] {
+    // const livros: Livro[] = []
+    // items.forEach(item => {
+    //   livros.push(this.livro = {
+    //     title: item.volumeInfo?.title,
+    //     authors: item.volumeInfo?.authors,
+    //     publisher: item.volumeInfo?.publisher,
+    //     publishedDate: item.volumeInfo?.publishedDate,
+    //     description: item.volumeInfo?.description,
+    //     previewLink: item.volumeInfo?.previewLink,
+    //     thumbnail: item.volumeInfo?.imageLinks?.thumbnail
+    //   })
+    // });
+    // return livros
+
+    return items.map(item => {
+      return new classLivroVolumeInfo(item)
+    })
+
   }
 
   ngOnDestroy() {
