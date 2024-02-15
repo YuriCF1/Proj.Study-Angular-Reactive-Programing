@@ -3,9 +3,12 @@
   <div class="busca">
     <input
       type="search"
-      [(ngModel)]="searchField"
-    >
-    <button (click)="getTheBooks()">
+      [formControl]="searchField"
+      >
+      <!-- [(ngModel)]="searchField" -->
+      <!-- (keyup)="getTheBooks()" -->
+    <!-- <button (click)="getTheBooks()"> -->
+    <button>
       <img src="assets/imagens/icone-busca.png" alt="Lupa de cor roxa">
     </button>
   </div>
