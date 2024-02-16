@@ -1,9 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription, filter, map, switchMap, tap } from 'rxjs';
+import { Subscription, debounceTime, filter, map, switchMap, tap } from 'rxjs';
 import { Item, Livro } from 'src/app/models/interfaces';
 import { classLivroVolumeInfo } from 'src/app/models/livrosVolumeInfo';
 import { BookService } from 'src/app/service/book.service';
+
+const pausa = 600;
 
 @Component({
   selector: 'app-lista-livros',
@@ -23,14 +25,15 @@ export class ListaLivrosComponent {
 
   //CONVENÇÃO DA COMUNIDADE = USAR SÍMBOLO DE DOLAR NO FINAL QUANDO A VARIÁVEL REPRESENTAR UM OBSERVABLE
   livrosEncontrados$ = this.searchField.valueChanges.pipe( //valueChange retorna um Observable, então posso usar o pipe
+    debounceTime(pausa),
     filter((valorDigitado) => valorDigitado.length >= 3),
     tap(() => console.log('Fluxo inicial')),
     switchMap((valorDigitado) => this.service.getBooks(valorDigitado)), //O switchMap cancela todas as requisições anteriores. Passando apenas o último valor
+    tap((retornoDaAPI) => console.log(retornoDaAPI)),
     map(itens => //OBS: Arrow function com chave NÃO DÁ RETORNO. Tirando-os, implicita o retorno no ngFor do template
       // this.listaLivros = this.livrosResultadoParaLivros(itens)
       this.livrosResultadoParaLivros(itens)
     ),
-    tap(() => console.log('Requisição ao servidor'))
   )
 
 
