@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription, catchError, debounceTime, distinctUntilChanged, filter, map, switchMap, tap, throwError } from 'rxjs';
+import { EMPTY, Subscription, catchError, debounceTime, distinctUntilChanged, filter, map, switchMap, tap, throwError } from 'rxjs';
 import { Item, Livro } from 'src/app/models/interfaces';
 import { classLivroVolumeInfo } from 'src/app/models/livrosVolumeInfo';
 import { BookService } from 'src/app/service/book.service';
@@ -21,6 +21,8 @@ export class ListaLivrosComponent {
   // subscription: Subscription
   // livro: Livro
 
+  mensagemError = '';
+
   constructor(private service: BookService) { }
 
   //CONVENÇÃO DA COMUNIDADE = USAR SÍMBOLO DE DOLAR NO FINAL QUANDO A VARIÁVEL REPRESENTAR UM OBSERVABLE
@@ -35,9 +37,13 @@ export class ListaLivrosComponent {
       // this.listaLivros = this.livrosResultadoParaLivros(itens)
       this.livrosResultadoParaLivros(itens)
     ),
-    catchError(error => {
-      console.log(error)
-      return throwError(() => new Error('Ops, deu erradoz'))
+    catchError(error => { //O  catchError, não emite valores. Apenas captura o error. O throwError, retorna um observable. E termina seu ciclo de vida
+      //O EMPTY é um callback quando eu não quiser fazer nada. Encerrando o cilco de vida do observable.
+      //OBS: POR ISSO É NECESSÁRIO RECARREGAR A APLICAÇÃO, POIS COMO O COMPLETE, O EMPTY TAMBÉM ENCERRA O CICLO DE VIDA
+      this.mensagemError = 'Ops, houve um erro. Recarregue a aplicação'
+      return EMPTY
+      // console.log(error)
+      // return throwError(() => new Error(this.mensagemError = 'Ops, deu errado. Recarregue a aplicação'))
     })
   )
 
