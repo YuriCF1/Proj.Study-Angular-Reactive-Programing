@@ -10,9 +10,15 @@
     </button>
   </div>
   <p>Busque por assunto, autoria, nome...</p>
+  <div class="resultados mensagem-erro" *ngIf="mensagemError">
+    {{ mensagemError }}
+  </div>
   <!-- <div class="container-card" *ngIf="listaLivros?.length > 0, else telaInicial"> -->
- <!-- | async = Subscribes se inscreve, passa o conteúdo para a variável local (listaLivro) e quando o componente se encerra, ele unsubscribe-->
-    <div class="container-card" *ngIf="livrosEncontrados$ | async as listaLivros, else telaInicial">
+  <!-- | async = Subscribes se inscreve, passa o conteúdo para a variável local (listaLivro) e quando o componente se encerra, ele unsubscribe-->
+  <div
+    class="container-card"
+    *ngIf="livrosEncontrados$ | async as listaLivros; else telaInicial"
+  >
     <div *ngFor="let livro of listaLivros">
       <app-livro [livro]="livro"></app-livro>
     </div>
