@@ -13,16 +13,20 @@
   <div class="resultados mensagem-erro" *ngIf="mensagemError">
     {{ mensagemError }}
   </div>
-  <div class="resultados" *ngIf="totalDeLivros$ | async">
-    {{livrosResultado.totalItems}} resultados encontrados
+  <div class="resultados" *ngIf="livrosEncontrados$ | async">
+    <strong>{{ livrosResultado.totalItems }}</strong>
+    <p> resultados encontrados</p>
   </div>
   <!-- <div class="container-card" *ngIf="listaLivros?.length > 0, else telaInicial"> -->
   <!-- | async = Subscribes se inscreve, passa o conteúdo para a variável local (listaLivro) e quando o componente se encerra, ele unsubscribe-->
   <div
     class="container-card"
-    *ngIf="livrosEncontrados$ | async as listaLivros; else telaInicial"
+    *ngIf="
+      livrosEncontrados$ | async as listaLivrosObTidosVariavelDeclaradaAqui;
+      else telaInicial
+    "
   >
-    <div *ngFor="let livro of listaLivros">
+    <div *ngFor="let livro of listaLivrosObTidosVariavelDeclaradaAqui">
       <app-livro [livro]="livro"></app-livro>
     </div>
   </div>
