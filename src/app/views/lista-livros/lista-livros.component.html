@@ -13,6 +13,9 @@
   <div class="resultados mensagem-erro" *ngIf="mensagemError">
     {{ mensagemError }}
   </div>
+  <div class="resultados" *ngIf="totalDeLivros$ | async">
+    {{livrosResultado.totalItems}} resultados encontrados
+  </div>
   <!-- <div class="container-card" *ngIf="listaLivros?.length > 0, else telaInicial"> -->
   <!-- | async = Subscribes se inscreve, passa o conteúdo para a variável local (listaLivro) e quando o componente se encerra, ele unsubscribe-->
   <div
