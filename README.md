@@ -1,27 +1,54 @@
-# Buscante
+# Google Books Search
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
+<!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
+### Deploy of the project: Done
+https://proj-study-angular-reactive-programing.vercel.app/lista-livros
 
-## Development server
+## About it
+A site that used <a href="https://developers.google.com/books/docs/overview?hl=pt-br">Google Books API</a>, focusing on using Rxjs.    
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Description
+Coded with Angular and Typescript, using rxjs to optimize search and experience.
 
-## Code scaffolding
+<div id='comeco'>
+ </div>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Languages and Frameworks
+- HTML
+- CSS
+- Typescript
+- Angular
+- Rxjs
 
-## Build
+### Steps
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- [ X ] HTML structure
+- [ X ] CSS Style
+- [ X ] Json file
+- [ X ] Creation of components
+- [ X ] Creation of interfaces
+- [ X ] Creation of service. GetBook function 
+- [ X ] Creation of custom pipes
+- [ X ] Creation of custom pipes
+- [ X ] Creation of custom pipes
+- [ X ] using of map, filter, distinctUntilChangeds, debounceTime
 
-## Running unit tests
+<img src="https://raw.githubusercontent.com/YuriCF1/Portfolio-Dev/9e9423119a9fb7f25037c6aa2bd684f70990afc2/public/assets/img/example.png" alt="imagem do site">
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🤝 Colaborators
 
-## Running end-to-end tests
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/yf19/">
+        <img src="https://github.com/YuriCF1/YuriCF1/blob/main/99689063.jpg" width="100px;" alt="Foto do Yuri Cruz no GitHub"/><br>
+        <sub>
+          <b>Yuri Cruz</b>
+        </sub>
+      </a>
+    </td>
+ 
+</table>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[⬆ Go back to top](#comeco)<br>
