@@ -33,7 +33,7 @@ Coded with Angular and Typescript, using rxjs to optimize search and experience.
 - [ X ] Creation of custom pipes
 - [ X ] using of map, filter, distinctUntilChangeds, debounceTime
 
-<img src="https://raw.githubusercontent.com/YuriCF1/Portfolio-Dev/9e9423119a9fb7f25037c6aa2bd684f70990afc2/public/assets/img/example.png" alt="imagem do site">
+<img src="https://raw.githubusercontent.com/YuriCF1/Proj.Study-Angular-Reactive-Programing/b292142b50a7aa09b3bca26f77bfbc4fbcab5067/src/assets/imagens/example.png" alt="imagem do site">
 
 ## 🤝 Colaborators
 
