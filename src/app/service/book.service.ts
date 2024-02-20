@@ -13,17 +13,24 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(valueTyped: string): Observable<Item[]> {
+  // getBooks(valueTyped: string): Observable<Item[]> {
+  getBooks(valueTyped: string): Observable<LivrosResultados> {
     const params = new HttpParams().append('q', valueTyped)
-    return this.http.get<LivrosResultados>(this.API, { params }).pipe(//Deve também ser tipada no get, não apenas na função da requisição
-      tap<LivrosResultados>(retornoAPI => console.log('Antes do map', retornoAPI)),
-      map(resultado => resultado.items),
-      tap(resultado => console.log('Fluxo após o map:', resultado))
-    )
+    return this.http.get<LivrosResultados>(this.API, { params })
+    // .pipe(//Deve também ser tipada no get, não apenas na função da requisição
+      // tap<LivrosResultados>(retornoAPI => console.log('Antes do map', retornoAPI)),
+      // map(resultado => resultado.items ?? []), //Caso n tenha resultado, retornará um arrau vazio
+      // tap(resultado => console.log('Fluxo após o map:', resultado))
+    // )
   }
 }
 
+/*
+Pipe- Função que serve para agrupar múltiplos operadores. Não modifica o observable anterior.
 
+Tap - Operador de serviços públicos. Usado para debugging. Não modifica o observable.
+
+Map - Operador de transformação. Transforma o observable de acordo com a função passada. Retorna um observable modificado.*/
 /*
 
 O operador tap no Angular é utilizado para realizar ações secundárias (side effects)
