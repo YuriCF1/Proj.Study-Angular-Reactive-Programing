@@ -43,5 +43,6 @@ export interface Item {
 
 export interface LivrosResultados {
   items: Item[];
+  kind?: string,
   totalItems: number
 }
