@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { EMPTY, Subscription, catchError, debounceTime, distinctUntilChanged, filter, map, switchMap, tap, throwError } from 'rxjs';
-import { Item, Livro } from 'src/app/models/interfaces';
+import { EMPTY, Subscription, catchError, debounceTime, distinctUntilChanged, filter, map, of, switchMap, tap, throwError } from 'rxjs';
+import { Item, Livro, LivrosResultados } from 'src/app/models/interfaces';
 import { classLivroVolumeInfo } from 'src/app/models/livrosVolumeInfo';
 import { BookService } from 'src/app/service/book.service';
 
@@ -15,26 +15,44 @@ const pausa = 600;
 // export class ListaLivrosComponent implements OnDestroy {
 export class ListaLivrosComponent {
 
-  // listaLivros: Livro[];
+  listaLivros: Livro[];
   // searchField: string = '';
   searchField = new FormControl()
   // subscription: Subscription
   // livro: Livro
 
   mensagemError = '';
+  livrosResultado: LivrosResultados;
 
   constructor(private service: BookService) { }
+
+  // totalDeLivros$ = this.searchField.valueChanges.pipe(
+  //   debounceTime(pausa),
+  //   filter((valorDigitado) => valorDigitado.length >= 3),
+  //   tap(() => console.log('Fluxo inicial')),
+  //   distinctUntilChanged(),
+  //   switchMap((valorDigitado) => this.service.getBooks(valorDigitado)),
+  //   map(resultado => this.livrosResultado = resultado),
+  //   catchError(err => {
+  //     console.log(err)
+  //     return of()//Também pode ser usado como o EMPTY, mas aí ele pode emitir um valor. RECEBE PARÂMETROS
+  //   })
+  // )
 
   //CONVENÇÃO DA COMUNIDADE = USAR SÍMBOLO DE DOLAR NO FINAL QUANDO A VARIÁVEL REPRESENTAR UM OBSERVABLE
   livrosEncontrados$ = this.searchField.valueChanges.pipe( //valueChange retorna um Observable, então posso usar o pipe
     debounceTime(pausa),
-    filter((valorDigitado) => valorDigitado.length >= 3),
     tap(() => console.log('Fluxo inicial')),
+    filter((valorDigitado) => valorDigitado.length >= 3),
     distinctUntilChanged(), //Permite a requisição apenas quando há alterações. Evitando requisições seguidas pelo mesmo termo Ex: Mar, ma, mar
     switchMap((valorDigitado) => this.service.getBooks(valorDigitado)), //O switchMap cancela todas as requisições anteriores. Passando apenas o último valor
-    tap((retornoDaAPI) => console.log(retornoDaAPI)),
+    // tap((retornoDaAPI) => console.log('RetornoTAP', retornoDaAPI)),
+    // map(resultado => this.livrosResultado = resultado),
+    map(resultado => this.livrosResultado = resultado),
+    map(resultado => resultado.items ?? []),
+    // map(resultado => ),
     map(itens => //OBS: Arrow function com chave NÃO DÁ RETORNO. Tirando-os, implicita o retorno no ngFor do template
-      // this.listaLivros = this.livrosResultadoParaLivros(itens)
+      // this.listaLivros = this.livros.ResultadoParaLivros(itens)
       this.livrosResultadoParaLivros(itens)
     ),
     catchError(error => { //O  catchError, não emite valores. Apenas captura o error. O throwError, retorna um observable. E termina seu ciclo de vida
