@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { EMPTY, Subscription, catchError, debounceTime, distinctUntilChanged, filter, map, of, switchMap, tap, throwError } from 'rxjs';
+import { enterListAnimationTrigger } from 'src/app/animations';
 import { Item, Livro, LivrosResultados } from 'src/app/models/interfaces';
 import { classLivroVolumeInfo } from 'src/app/models/livrosVolumeInfo';
 import { BookService } from 'src/app/service/book.service';
@@ -10,7 +11,8 @@ const pausa = 600;
 @Component({
   selector: 'app-lista-livros',
   templateUrl: './lista-livros.component.html',
-  styleUrls: ['./lista-livros.component.css']
+  styleUrls: ['./lista-livros.component.css'],
+  animations: [enterListAnimationTrigger]
 })
 // export class ListaLivrosComponent implements OnDestroy {
 export class ListaLivrosComponent {
